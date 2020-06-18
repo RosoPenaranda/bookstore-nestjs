@@ -20,7 +20,7 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "psql:init": "docker run -d --name bookstore-db -e POSTGRES_PASSWORD=bookstore -e POSTGRES_USER=bookstore -e POSTGRES_DB=bookstore-db -p 5444:5432  postgres",
-    "db:star": "docker start bookstore-db",
+    "db:start": "docker start bookstore-db",
     "db:stop": "docker stop bookstore-db",
     "migration:generate": "ts-node node_modules/.bin/typeorm migration:generate --config ./orm.config.json --name",
     "migration:run": "ts-node node_modules/.bin/typeorm migration:run --config ./orm.config.json",
