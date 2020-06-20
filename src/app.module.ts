@@ -9,7 +9,6 @@ import { UserModule } from './modules/user/user.module';
 import { RoleModule } from './modules/role/role.module';
 //import { UserController } from './modules/user/user.controller';
 import { AuthModule } from './modules/auth/auth.module';
-
 @Module({
   imports: [ConfigModule, DatabaseModule, UserModule, RoleModule, AuthModule],
   controllers: [AppController],
