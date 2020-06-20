@@ -19,8 +19,8 @@ import { RoleGuard } from '../role/guards/role.guard';
 export class UserController {
   constructor(private readonly _userService: UserService) {}
 
-  @Get('/:id')
-  @Roles('AUTHOR')
+  @Get(':id')
+  @Roles('ADMIN', 'AUTHOR')
   @UseGuards(AuthGuard(), RoleGuard)
   async getUser(@Param('id', ParseIntPipe) id: number): Promise<User> {
     const user = await this._userService.get(id);
