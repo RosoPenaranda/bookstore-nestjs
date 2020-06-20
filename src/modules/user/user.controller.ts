@@ -30,7 +30,7 @@ export class UserController {
     return users;
   }
 
-  @Post('create')
+  @Post('/create')
   async createUser(@Body() user: User): Promise<User> {
     const createUser = await this._userService.create(user);
     return createUser;
@@ -46,8 +46,16 @@ export class UserController {
   }
 
   @Delete(':id')
-  async deleteUser(@Param('id', ParseIntPipe) id: number) {
+  async deleteUser(@Param('id', ParseIntPipe) id: number): Promise<boolean> {
     await this._userService.delete(id);
     return true;
+  }
+
+  @Post('/setRole/:userId/:roleId')
+  async setRoleToUser(
+    @Param('userId', ParseIntPipe) userId: number,
+    @Param('roleId', ParseIntPipe) roleId: number,
+  ): Promise<boolean> {
+    return this._userService.setRoleToUser(userId, roleId);
   }
 }
