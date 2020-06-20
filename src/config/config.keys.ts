@@ -5,4 +5,5 @@ export enum Configuration {
   DBNAME = 'DBNAME',
   DBPSW = 'DBPSW',
   DBPORT = 'DBPORT',
+  JWT_SECRET = 'JWT_SECRET',
 }
