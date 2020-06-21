@@ -22,8 +22,8 @@ export class UserController {
   constructor(private readonly _userService: UserService) {}
 
   @Get(':userId')
-  //  @Roles(RoleType.ADMIN, RoleType.AUTHOR)
-  //  @UseGuards(AuthGuard(), RoleGuard)
+  @Roles(RoleType.ADMIN, RoleType.AUTHOR)
+  @UseGuards(AuthGuard(), RoleGuard)
   async getUser(
     @Param('userId', ParseIntPipe) userId: number,
   ): Promise<ReadUserDto> {
