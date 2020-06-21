@@ -10,7 +10,6 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { UserService } from './user.service';
-import { User } from './user.entity';
 import { AuthGuard } from '@nestjs/passport';
 import { Roles } from '../role/decorator/role.decorator';
 import { RoleGuard } from '../role/guards/role.guard';
