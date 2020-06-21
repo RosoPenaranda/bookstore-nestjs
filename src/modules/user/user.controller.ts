@@ -15,45 +15,38 @@ import { AuthGuard } from '@nestjs/passport';
 import { Roles } from '../role/decorator/role.decorator';
 import { RoleGuard } from '../role/guards/role.guard';
 import { RoleType } from '../role/roletype.enum';
+import { ReadUserDto, UpdateUserDto } from './tdo';
 
 @Controller('users')
 export class UserController {
   constructor(private readonly _userService: UserService) {}
 
-  @Get(':id')
+  @Get(':userId')
   //  @Roles(RoleType.ADMIN, RoleType.AUTHOR)
   //  @UseGuards(AuthGuard(), RoleGuard)
-  async getUser(@Param('id', ParseIntPipe) id: number): Promise<User> {
-    const user = await this._userService.get(id);
-    return user;
+  async getUser(
+    @Param('userId', ParseIntPipe) userId: number,
+  ): Promise<ReadUserDto> {
+    return await this._userService.get(userId);
   }
 
   @UseGuards(AuthGuard())
   @Get()
-  async getUsers(): Promise<User[]> {
-    const users = await this._userService.getAll();
-    return users;
+  async getUsers(): Promise<ReadUserDto[]> {
+    return this._userService.getAll();
   }
 
-  @Post('/create')
-  async createUser(@Body() user: User): Promise<User> {
-    const createUser = await this._userService.create(user);
-    return createUser;
-  }
-
-  @Patch(':id')
+  @Patch(':userId')
   async updateUser(
-    @Param('id', ParseIntPipe) id: number,
-    @Body() user: User,
-  ): Promise<void> {
-    const updateUser = await this._userService.update(id, user);
-    return updateUser;
+    @Param('userId', ParseIntPipe) userId: number,
+    @Body() user: UpdateUserDto,
+  ): Promise<ReadUserDto> {
+    return this._userService.update(userId, user);
   }
 
   @Delete(':id')
-  async deleteUser(@Param('id', ParseIntPipe) id: number): Promise<boolean> {
-    await this._userService.delete(id);
-    return true;
+  async deleteUser(@Param('id', ParseIntPipe) id: number): Promise<void> {
+    return this._userService.delete(id);
   }
 
   @Post('/setRole/:userId/:roleId')
